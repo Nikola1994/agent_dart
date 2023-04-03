@@ -20,7 +20,7 @@ dependencies:
   collection: ^1.16.0
   convert: ^3.0.1
   crypto: ^3.0.2
-  ffi: ^1.2.1
+  ffi: ^1.51.0
   fixnum: ^1.0.1
   flutter:
     sdk: flutter
