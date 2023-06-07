@@ -1,17 +1,27 @@
-import 'dart:typed_data';
 import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:agent_dart/utils/extension.dart';
+import 'package:meta/meta.dart';
 
 import 'utils/leb128.dart';
 
-// ignore: constant_identifier_names
 enum BlobType { binary, der, nonce, requestId }
 
+@immutable
 abstract class BaseBlob {
-  late final Uint8List _buffer;
-  late BlobType blobType;
-  late String blobName;
+  const BaseBlob(
+    Uint8List buffer,
+    this.blobType,
+    this.blobName,
+  ) : _buffer = buffer;
+
+  final Uint8List _buffer;
+  final BlobType blobType;
+  final String blobName;
+
   Uint8List get buffer => _buffer;
+
   int get byteLength;
 }
 
@@ -21,9 +31,12 @@ typedef Nonce = BinaryBlob;
 typedef RequestId = BinaryBlob;
 
 extension ExtBinaryBlob on BinaryBlob {
-  String get name => "__BLOB";
+  String get name => '__BLOB';
+
   BlobType get blobType => BlobType.binary;
+
   int get byteLength => lengthInBytes;
+
   static Uint8List from(Uint8List other) => Uint8List.fromList(other);
 }
 
@@ -52,7 +65,7 @@ BinaryBlob blobFromHex(String hex) {
 }
 
 String blobToHex(BinaryBlob blob) {
-  return blob.toHex(include0x: false);
+  return blob.toHex();
 }
 
 Uint8List blobToUint8Array(BinaryBlob blob) {
@@ -60,8 +73,10 @@ Uint8List blobToUint8Array(BinaryBlob blob) {
 }
 
 Nonce makeNonce() {
-  return Nonce.fromList(lebEncode(
-    BigInt.from(DateTime.now().millisecondsSinceEpoch) * BigInt.from(100000) +
-        BigInt.from((Random.secure().nextInt(1) * 100000).floor()),
-  ));
+  return Nonce.fromList(
+    lebEncode(
+      BigInt.from(DateTime.now().millisecondsSinceEpoch) * BigInt.from(100000) +
+          BigInt.from((Random.secure().nextInt(1) * 100000).floor()),
+    ),
+  );
 }

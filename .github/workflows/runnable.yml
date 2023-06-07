@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   test:
@@ -14,16 +11,24 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-22.04]
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
         with:
-          java-version: '11.x'
-      - uses: subosito/flutter-action@v1
+          distribution: 'adopt'
+          java-version: '11'
+      - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
       - run: dart --version
       - run: flutter --version
       - run: flutter pub get
       - run: flutter test ./test/agent_dart_test.dart # This is the only test that's runnable on actions.
+      - name: Dry run
+        if: github.repository == 'AstroxNetwork/agent_dart'
+        uses: k-paxian/dart-package-publisher@master
+        with:
+          credentialJson: ${{ secrets.CREDENTIAL_JSON }}
+          flutter: true
+          dryRunOnly: true

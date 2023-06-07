@@ -7,12 +7,14 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Dart and Flutter Package Publisher
-        uses: k-paxian/dart-package-publisher@v1.3
+        uses: k-paxian/dart-package-publisher@master
         with:
           credentialJson: ${{ secrets.CREDENTIAL_JSON }}
-          flutter: true
+          force: true
+          skipTests: true
+          suppressBuildRunner: true

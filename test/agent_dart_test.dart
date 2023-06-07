@@ -1,12 +1,11 @@
-// ignore: unused_import
-import 'package:flutter_test/flutter_test.dart';
-import './agent/agent.dart' as agent;
-import './authentication/authentication.dart' as auth;
-import './candid/idl.dart' as candid;
-import './identity/identity.dart' as identity;
-import './principal/index.dart' as principal;
-import './wallet/signer.dart' as signer;
-import './wallet/pem.dart' as pem;
+import 'agent/agent.dart' as agent;
+import 'authentication/authentication.dart' as auth;
+import 'candid/idl.dart' as candid;
+import 'identity/identity.dart' as identity;
+import 'principal/index.dart' as principal;
+import 'utils/utils_test.dart' as utils;
+import 'wallet/pem.dart' as pem;
+import 'wallet/signer.dart' as signer;
 
 void main() {
   agent.main();
@@ -14,6 +13,7 @@ void main() {
   candid.main();
   identity.main();
   principal.main();
+  utils.main();
   signer.main();
   pem.main();
 }

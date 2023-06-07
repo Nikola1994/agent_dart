@@ -1,6 +1,90 @@
-## Backlog
-We use NDK21e to build on android since latest CI build failed. 
-Might change to latest NDK once we have solution.
+<!-- Copyright 2022 The AstroX author. All rights reserved.
+Use of this source code is governed by an Apache license
+that can be found in the LICENSE file. -->
+
+# Changelog
+
+## 1.0.0-dev.15
+
+- Support for Dart 3.0.
+
+## 1.0.0-dev.14
+
+- Send `methodName` into `pollForResponse`.
+- Rename `Predicate` to `PollPredicate`.
+- Rename `PollingResponseDoneException` to `PollingResponseNoReplyException`.
+- Retry failed `call`, `query`, `read_state`, `status` requests.
+
+## 1.0.0-dev.13
+
+- Add HttpAgent.`fromUri` factory.
+
+## 1.0.0-dev.12
+
+- Add `canisterId` and `caller` for `PollingResponseException`.
+- Declare return types for fields and methods.
+
+## 1.0.0-dev.11
+
+- Unify optional `password` for encrypt/decrypt methods.
+
+## 1.0.0-dev.10
+
+- Migrate `ic0.app` to `icp0.io`.
+- Default to empty password for encrypt/decrypt Cbor messages.
+
+## 1.0.0-dev.9
+
+- Provide AES-256-GCM encryption/decryption instead of `AES-256-CBC`. (#54)
+
+## 1.0.0-dev.8
+
+- `BigInt` for polling exceptions' reject code. (#49)
+- Add `Actor.createActorMethod`.
+- Support secp256k1 from FFI.
+- Add `CoinType`.
+
+## 1.0.0-dev.7
+
+- Fix RecordClass `covariant`.
+
+## 1.0.0-dev.6
+
+- `bnToHex` not produce `0x` by default.
+- `hexFixLength` and `isHex` now use named arguments.
+- Remove `isHexString` and `isHexadecimal`.
+- Allow to configure `include0x` with `toHex`.
+- Add `secp256K1SignRecoverable` with FFI upgrade.
+
+## 1.0.0-dev.5
+
+- Fix `isHex` and `isTestChain`.
+- Remove `IdentityDescriptor`.
+
+## 1.0.0-dev.4
+
+- Improve all import/export sorts.
+- Add `@immutable` as much as possible.
+- Better construct for `RosettaTransaction` and `RecClass`.
+- Make `PrimitiveType`'s constructor private.
+- Constraint Android API support range to 23~32.
+
+## 1.0.0-dev.3
+
+- Use the correct super class for `HttpAgentCallRequest`. (#39)
+
+## 1.0.0-dev.2
+
+- Tweak ignored files for pub.dev.
+
+## 1.0.0-dev.1
+
+- Support FFI asynchronized methods with Rust bindings.
+- Consist all namings, fields and constructors, including:
+  - `fromMap` -> `fromJson`
+  - `toJSON` -> `toJson`
+- Better throws when exceptions occurred.
+- Remove unused codes.
 
 ## 0.1.24+1
 
